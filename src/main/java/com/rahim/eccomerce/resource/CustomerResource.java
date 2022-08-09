@@ -18,15 +18,15 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class CustomerResource {
-    private final CustomerServiceImplementation userService;
+    private final CustomerServiceImplementation customerService;
 
     @GetMapping("/list")
     public ResponseEntity<Response> getUsers() {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Items", userService.list(20)))
-                        .message("Items Retrieved")
+                        .data(of("Items", customerService.list(20)))
+                        .message("Customer Retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -38,8 +38,8 @@ public class CustomerResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("User", userService.get(id)))
-                        .message("User Retrieved")
+                        .data(of("User", customerService.get(id)))
+                        .message("Customer Retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -51,8 +51,8 @@ public class CustomerResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Users", userService.create(customer)))
-                        .message("User Created")
+                        .data(of("Customer", customerService.create(customer)))
+                        .message("Customer Created")
                         .status(CREATED)
                         .statusCode(CREATED.value())
                         .build()
@@ -64,8 +64,8 @@ public class CustomerResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Deleted", userService.delete(id)))
-                        .message("User Deleted")
+                        .data(of("Deleted", customerService.delete(id)))
+                        .message("Customer Deleted")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -77,7 +77,7 @@ public class CustomerResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Updated Email", userService.updateEmail(id, email)))
+                        .data(of("Updated Email", customerService.updateEmail(id, email)))
                         .message("Email Updated")
                         .status(OK)
                         .statusCode(OK.value())
