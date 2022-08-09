@@ -3,6 +3,7 @@ package com.rahim.eccomerce.resource;
 import com.rahim.eccomerce.model.Item;
 import com.rahim.eccomerce.model.Response;
 import com.rahim.eccomerce.service.ItemService;
+import com.rahim.eccomerce.service.implementation.ItemServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class ItemResource {
 
-    private final ItemService itemService;
+    private final ItemServiceImplementation itemService;
 
     @GetMapping("/list")
     public ResponseEntity<Response> getItems() {
