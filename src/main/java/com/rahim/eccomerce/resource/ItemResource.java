@@ -1,8 +1,8 @@
 package com.rahim.eccomerce.resource;
 
+import com.rahim.eccomerce.enumeration.Stock;
 import com.rahim.eccomerce.model.Item;
 import com.rahim.eccomerce.model.Response;
-import com.rahim.eccomerce.service.ItemService;
 import com.rahim.eccomerce.service.implementation.ItemServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class ItemResource {
         );
     }
 
-    @GetMapping("/list/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Response> getItems(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
                 Response.builder()
@@ -68,6 +68,32 @@ public class ItemResource {
                         .timeStamp(now())
                         .data(of("Deleted", itemService.delete(id)))
                         .message("Item Deleted")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+    @PutMapping("/update-price/{id}/{price}")
+    public ResponseEntity<Response> updateItem(@PathVariable Long id, @PathVariable double price) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("Updated Price", itemService.updatePrice(id, price)))
+                        .message("Item Price Updated")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+    @PutMapping("/update-stock/{id}/{stock}")
+    public ResponseEntity<Response> updateItem(@PathVariable Long id, @PathVariable Stock stock) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("Updated Stock", itemService.updateStock(id, stock)))
+                        .message("Item Stock Updated")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()

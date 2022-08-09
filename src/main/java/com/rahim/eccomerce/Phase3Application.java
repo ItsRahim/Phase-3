@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import static com.rahim.eccomerce.enumeration.Stock.AVAILABLE_STOCK;
+
 @SpringBootApplication
 public class Phase3Application {
 
@@ -16,14 +18,12 @@ public class Phase3Application {
 
     @Bean
     CommandLineRunner commandLineRunner(ItemRepo itemRepo) {
-        return args -> {
-            itemRepo.save(new Item(
-                    null,
-                    "Nike 270",
-                    "Black Nike Shoes",
-                    "Black",
-                    270.00));
-        };
+        return args -> itemRepo.save(new Item(
+                null,
+                "Nike 270",
+                "Black Nike Shoes",
+                "Black",
+                270.00,
+                AVAILABLE_STOCK));
     }
-
 }

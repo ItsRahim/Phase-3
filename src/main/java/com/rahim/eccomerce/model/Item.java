@@ -1,5 +1,6 @@
 package com.rahim.eccomerce.model;
 
+import com.rahim.eccomerce.enumeration.Stock;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,5 @@ public class Item {
     private String description;
     private String category;
     private double price;
+    private Stock stock;
 }

@@ -1,5 +1,6 @@
 package com.rahim.eccomerce.service.implementation;
 
+import com.rahim.eccomerce.enumeration.Stock;
 import com.rahim.eccomerce.model.Item;
 import com.rahim.eccomerce.repository.ItemRepo;
 import com.rahim.eccomerce.service.ItemService;
@@ -32,8 +33,17 @@ public class ItemServiceImplementation implements ItemService {
     }
 
     @Override
-    public Item update(Item item) {
-        return null;
+    public Item updatePrice(Long id, double price) {
+        Item item = itemRepo.findById(id).get();
+        item.setPrice(price);
+        return itemRepo.save(item);
+    }
+
+    @Override
+    public Item updateStock(Long id, Stock stock) {
+        Item item = itemRepo.findById(id).get();
+        item.setStock(stock);
+        return itemRepo.save(item);
     }
 
     @Override
