@@ -1,9 +1,8 @@
 package com.rahim.eccomerce.resource;
 
-import com.rahim.eccomerce.enumeration.Stock;
-import com.rahim.eccomerce.model.Item;
 import com.rahim.eccomerce.model.Response;
-import com.rahim.eccomerce.service.implementation.ItemServiceImplementation;
+import com.rahim.eccomerce.model.User;
+import com.rahim.eccomerce.service.implementation.UserServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,18 +15,17 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/user")
 @RequiredArgsConstructor
-public class ItemResource {
-
-    private final ItemServiceImplementation itemService;
+public class UserResource {
+    private final UserServiceImplementation userService;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getItems() {
+    public ResponseEntity<Response> getUsers() {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Items", itemService.list(20)))
+                        .data(of("Items", userService.list(20)))
                         .message("Items Retrieved")
                         .status(OK)
                         .statusCode(OK.value())
@@ -36,12 +34,12 @@ public class ItemResource {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getItem(@PathVariable("id") Long id) {
+    public ResponseEntity<Response> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Items", itemService.get(id)))
-                        .message("Item Retrieved")
+                        .data(of("User", userService.get(id)))
+                        .message("User Retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -49,12 +47,12 @@ public class ItemResource {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Response> saveItem(@RequestBody @Valid Item item) {
+    public ResponseEntity<Response> saveUser(@RequestBody @Valid User user) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Items", itemService.create(item)))
-                        .message("Item Created")
+                        .data(of("Users", userService.create(user)))
+                        .message("User Created")
                         .status(CREATED)
                         .statusCode(CREATED.value())
                         .build()
@@ -62,41 +60,29 @@ public class ItemResource {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteItem(@PathVariable("id") Long id) {
+    public ResponseEntity<Response> deleteUser(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Deleted", itemService.delete(id)))
-                        .message("Item Deleted")
+                        .data(of("Deleted", userService.delete(id)))
+                        .message("User Deleted")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
         );
     }
 
-    @PutMapping("/update-price/{id}/{price}")
-    public ResponseEntity<Response> updateItemPrice(@PathVariable Long id, @PathVariable double price) {
+    @PutMapping("/update-email/{id}/{email}")
+    public ResponseEntity<Response> updateUserEmail(@PathVariable Long id, @PathVariable String email) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Updated Price", itemService.updatePrice(id, price)))
-                        .message("Item Price Updated")
+                        .data(of("Updated Email", userService.updateEmail(id, email)))
+                        .message("Email Updated")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
         );
     }
 
-    @PutMapping("/update-stock/{id}/{stock}")
-    public ResponseEntity<Response> updateItemStock(@PathVariable Long id, @PathVariable Stock stock) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Updated Stock", itemService.updateStock(id, stock)))
-                        .message("Item Stock Updated")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
-    }
 }
