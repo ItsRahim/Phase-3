@@ -1,8 +1,8 @@
 package com.rahim.eccomerce.resource;
 
 import com.rahim.eccomerce.model.Response;
-import com.rahim.eccomerce.model.User;
-import com.rahim.eccomerce.service.implementation.UserServiceImplementation;
+import com.rahim.eccomerce.model.Customer;
+import com.rahim.eccomerce.service.implementation.CustomerServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,8 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class UserResource {
-    private final UserServiceImplementation userService;
+public class CustomerResource {
+    private final CustomerServiceImplementation userService;
 
     @GetMapping("/list")
     public ResponseEntity<Response> getUsers() {
@@ -47,11 +47,11 @@ public class UserResource {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Response> saveUser(@RequestBody @Valid User user) {
+    public ResponseEntity<Response> saveUser(@RequestBody @Valid Customer customer) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Users", userService.create(user)))
+                        .data(of("Users", userService.create(customer)))
                         .message("User Created")
                         .status(CREATED)
                         .statusCode(CREATED.value())
