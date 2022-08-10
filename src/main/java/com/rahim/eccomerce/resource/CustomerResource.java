@@ -25,7 +25,7 @@ public class CustomerResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("Items", customerService.list(20)))
+                        .data(of("User", customerService.list(20)))
                         .message("Customer Retrieved")
                         .status(OK)
                         .statusCode(OK.value())

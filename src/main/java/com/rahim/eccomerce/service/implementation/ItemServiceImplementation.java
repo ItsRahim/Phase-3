@@ -22,38 +22,36 @@ public class ItemServiceImplementation implements ItemService {
 
     private final ItemRepo itemRepo;
 
-    @Override
     public Item create(Item item) {
         return itemRepo.save(item);
     }
 
-    @Override
     public Item get(Long id) {
         return itemRepo.findById(id).get();
     }
 
-    @Override
     public Item updatePrice(Long id, double price) {
         Item item = itemRepo.findById(id).get();
         item.setPrice(price);
         return itemRepo.save(item);
     }
 
-    @Override
     public Item updateStock(Long id, Stock stock) {
         Item item = itemRepo.findById(id).get();
         item.setStock(stock);
         return itemRepo.save(item);
     }
 
-    @Override
     public Boolean delete(Long id) {
         itemRepo.deleteById(id);
         return TRUE;
     }
 
-    @Override
     public Collection<Item> list(int limit) {
         return itemRepo.findAll(PageRequest.of(0, limit)).toList();
+    }
+
+    public Item getByCategory(String category) {
+        return itemRepo.findByCategory(category);
     }
 }

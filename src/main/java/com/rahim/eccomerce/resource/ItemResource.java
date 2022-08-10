@@ -48,6 +48,19 @@ public class ItemResource {
         );
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<Response> getItem(@PathVariable("category") String category) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("Items", itemService.getByCategory(category)))
+                        .message("Item Retrieved")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
     @PostMapping("/save")
     public ResponseEntity<Response> saveItem(@RequestBody @Valid Item item) {
         return ResponseEntity.ok(
