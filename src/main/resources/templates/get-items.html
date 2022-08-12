@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Item Page</title>
+    <link th:href="@{/styles/all-item.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>All Items</h1>
+<hr class="header-ruling">
+<table class="content-table">
+    <thead>
+    <tr>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+    </tr>
+    </thead>
+    <th:block th:each="item: ${itemData}">
+        <tbody>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.description}"></td>
+            <td th:text="${item.category}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.stock}"></td>
+        </tbody>
+    </th:block>
+</table>
+</body>
+</html>

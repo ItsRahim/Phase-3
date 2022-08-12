@@ -28,6 +28,14 @@ public class DataConfiguration {
                     270.00,
                     AVAILABLE_STOCK
             );
+            Item adidas = new Item(
+                    null,
+                    "Adidas Ultraboost",
+                    "Running Shoes",
+                    "Shoe",
+                    180,
+                    AVAILABLE_STOCK
+            );
             Customer rahim = new Customer(
                     null,
                     "Rahim Ahmed",
@@ -35,7 +43,7 @@ public class DataConfiguration {
                     LocalDate.of(2001, Month.AUGUST, 17),
                     MALE
             );
-            itemRepo.saveAll(List.of(nike270));
+            itemRepo.saveAll(List.of(nike270, adidas));
             customerRepo.saveAll(List.of(rahim));
         };
     }

@@ -4,6 +4,7 @@ import com.rahim.eccomerce.model.Customer;
 import com.rahim.eccomerce.service.implementation.CustomerServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,12 +14,12 @@ import static java.util.Map.of;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class CustomerResource {
     private final CustomerServiceImplementation customerService;
-
+/*
     @GetMapping("/list")
     public ResponseEntity<Response> getUsers() {
         return ResponseEntity.ok(
@@ -83,5 +84,5 @@ public class CustomerResource {
                         .build()
         );
     }
-
+*/
 }

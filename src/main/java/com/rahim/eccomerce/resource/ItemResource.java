@@ -19,10 +19,9 @@ public class ItemResource {
     private final ItemServiceImplementation itemService;
 
     @GetMapping("/list")
-    //itemservice.list(20)
     public String getItems(Model model) {
-        model.addAttribute("items", itemService.list(20));
-        return "item";
+        model.addAttribute("itemData", itemService.list(20));
+        return "get-items";
     }
 
     /*
