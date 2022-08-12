@@ -1,6 +1,5 @@
 package com.rahim.eccomerce.resource;
 
-import com.rahim.eccomerce.model.Response;
 import com.rahim.eccomerce.model.Customer;
 import com.rahim.eccomerce.service.implementation.CustomerServiceImplementation;
 import lombok.RequiredArgsConstructor;

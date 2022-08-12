@@ -2,20 +2,16 @@ package com.rahim.eccomerce.resource;
 
 import com.rahim.eccomerce.enumeration.Stock;
 import com.rahim.eccomerce.model.Item;
-import com.rahim.eccomerce.model.Response;
 import com.rahim.eccomerce.service.implementation.ItemServiceImplementation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static java.time.LocalDateTime.now;
-import static java.util.Map.of;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
-
-@RestController
+//TODO change to @Controller
+@Controller
 @RequestMapping("/item")
 @RequiredArgsConstructor
 public class ItemResource {
@@ -23,93 +19,55 @@ public class ItemResource {
     private final ItemServiceImplementation itemService;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getItems() {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Items", itemService.list(20)))
-                        .message("Items Retrieved")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    //itemservice.list(20)
+    public String getItems(Model model) {
+        model.addAttribute("items", itemService.list(20));
+        return "item";
     }
 
+    /*
+    1. Create a Controller (MVC controller)
+    2. API to getItem  annotate that method with appropriate @GetMapping
+    3. Get data from DAO and populate model object
+       ex. model.addAttribute("item", {data})
+    4. Return view String (any string)
+    5. Spring Boot MVC framework will append .html and try  to find out from template folder
+    6. Write html configure thymeleaf
+    7. Represent in table, - thymeleaf populate table, ${}item.name
+     */
+
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getItem(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Items", itemService.get(id)))
-                        .message("Item Retrieved")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    public String getById(Model model, @RequestParam ("id") Long id) {
+        return "Hello";
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<Response> getItem(@PathVariable("category") String category) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Items", itemService.getByCategory(category)))
-                        .message("Item Retrieved")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    public String getItem(@PathVariable("category") String category) {
+        //itemService.getByCategory(category)
+        return "Hello";
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Response> saveItem(@RequestBody @Valid Item item) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Items", itemService.create(item)))
-                        .message("Item Created")
-                        .status(CREATED)
-                        .statusCode(CREATED.value())
-                        .build()
-        );
+    public String saveItem(@RequestBody @Valid Item item) {
+        //itemService.create(item)
+        return "Save";
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteItem(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Deleted", itemService.delete(id)))
-                        .message("Item Deleted")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    public String deleteItem(@PathVariable("id") Long id) {
+        //itemService.delete(id)
+        return "delete";
     }
 
     @PutMapping("/update-price/{id}/{price}")
-    public ResponseEntity<Response> updateItemPrice(@PathVariable Long id, @PathVariable double price) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Updated Price", itemService.updatePrice(id, price)))
-                        .message("Item Price Updated")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    public String updateItemPrice(@PathVariable Long id, @PathVariable double price) {
+        //itemService.updatePrice(id, price)
+        return "update";
     }
 
     @PutMapping("/update-stock/{id}/{stock}")
-    public ResponseEntity<Response> updateItemStock(@PathVariable Long id, @PathVariable Stock stock) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Updated Stock", itemService.updateStock(id, stock)))
-                        .message("Item Stock Updated")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    public String updateItemStock(@PathVariable Long id, @PathVariable Stock stock) {
+        //itemService.updateStock(id, stock)
+        return "stock";
     }
 }
