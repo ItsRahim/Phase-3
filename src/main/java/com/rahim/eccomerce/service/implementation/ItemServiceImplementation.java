@@ -51,7 +51,7 @@ public class ItemServiceImplementation implements ItemService {
         return itemRepo.findAll(PageRequest.of(0, limit)).toList();
     }
 
-    public Item getByCategory(String category) {
+    public Collection<Item> getByCategory(String category) {
         return itemRepo.findByCategory(category);
     }
 }

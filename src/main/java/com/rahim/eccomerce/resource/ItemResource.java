@@ -26,14 +26,17 @@ public class ItemResource {
     }
 
     @GetMapping("/get/{id}")
-    public String getById(Model model, @RequestParam ("id") Long id) {
-        return "Hello";
+    public String getById(Model model, @PathVariable Long id) {
+        model.addAttribute("titlePage", "Item By ID");
+        model.addAttribute("itemData", itemService.get(id));
+        return "get-items";
     }
 
     @GetMapping("/category/{category}")
-    public String getItem(@PathVariable("category") String category) {
-        //itemService.getByCategory(category)
-        return "Hello";
+    public String getItem(Model model,@PathVariable String category) {
+        model.addAttribute("titlePage", "Item By " + category);
+        model.addAttribute("itemData", itemService.getByCategory(category));
+        return "get-items";
     }
 
     @PostMapping("/save")

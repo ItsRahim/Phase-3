@@ -12,5 +12,5 @@ public interface ItemService {
     Item updateStock(Long id, Stock stock);
     Boolean delete(Long id);
     Collection<Item> list(int limit);
-    Item getByCategory(String category);
+    Collection<Item> getByCategory(String category);
 }
