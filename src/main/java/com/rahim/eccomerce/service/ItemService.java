@@ -6,7 +6,7 @@ import com.rahim.eccomerce.model.Item;
 import java.util.Collection;
 
 public interface ItemService {
-    Item create(Item item);
+    Item save(Item item);
     Item get(Long id);
     Item updatePrice(Long id, double price);
     Item updateStock(Long id, Stock stock);

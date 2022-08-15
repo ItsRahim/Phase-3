@@ -22,7 +22,7 @@ public class ItemServiceImplementation implements ItemService {
 
     private final ItemRepo itemRepo;
 
-    public Item create(Item item) {
+    public Item save(Item item) {
         return itemRepo.save(item);
     }
 
