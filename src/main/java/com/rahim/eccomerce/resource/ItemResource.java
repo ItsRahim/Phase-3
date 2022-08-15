@@ -20,20 +20,10 @@ public class ItemResource {
 
     @GetMapping("/list")
     public String getItems(Model model) {
+        model.addAttribute("titlePage", "All Items");
         model.addAttribute("itemData", itemService.list(20));
         return "get-items";
     }
-
-    /*
-    1. Create a Controller (MVC controller)
-    2. API to getItem  annotate that method with appropriate @GetMapping
-    3. Get data from DAO and populate model object
-       ex. model.addAttribute("item", {data})
-    4. Return view String (any string)
-    5. Spring Boot MVC framework will append .html and try  to find out from template folder
-    6. Write html configure thymeleaf
-    7. Represent in table, - thymeleaf populate table, ${}item.name
-     */
 
     @GetMapping("/get/{id}")
     public String getById(Model model, @RequestParam ("id") Long id) {
