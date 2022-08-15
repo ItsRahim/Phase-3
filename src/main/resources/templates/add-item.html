@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Item</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div>
+      <h1>Add New Item</h1>
+    </div>
+
+    <form>
+      <div>
+
+        <div>
+        <label>
+          Product Name
+          <input type="text" id="product-name">
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Description
+          <input type="text" id="description">
+        </label>
+      </div>
+
+      <div>
+        <label for="category">Choose a category:</label>
+        <select name="category" id="category">
+          <option value=""></option>
+          <option value="Shoe">Shoe</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label>
+          Price
+          <input type="number" min="1" step="any" id="price">
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Stock
+          <input type="text" id="stock">
+        </label>
+      </div>
+      
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
