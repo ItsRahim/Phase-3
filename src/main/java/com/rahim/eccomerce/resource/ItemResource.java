@@ -8,9 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
-//TODO change to @Controller
 @Controller
 @RequestMapping("/item")
 @RequiredArgsConstructor
@@ -39,10 +36,10 @@ public class ItemResource {
         return "get-items";
     }
 
-    @PostMapping("/save")
-    public String saveItem(@RequestBody @Valid Item item) {
-        //itemService.create(item)
-        return "Save";
+    @GetMapping("/save")
+    public String saveItem(Model model) {
+        model.addAttribute("item", new Item());
+        return "add-item";
     }
 
     @DeleteMapping("/delete/{id}")
