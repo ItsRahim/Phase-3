@@ -11,7 +11,7 @@
     <div>
       <h1>Add New Item</h1>
     </div>
-    <form th:action="@{/item/save-item}" th:object="${newItem}" method="POST">
+    <form th:action="@{/item/save-item}" th:object="${item}" method="POST">
       <div>
         <label>
           Product Name
@@ -27,8 +27,11 @@
       </div>
       <br>
       <div>
+        <label>
+          Category
+        </label>
         <select class="form-select" aria-label="Default select example"  th:field="*{category}">
-          <option selected>Category</option>
+          <option selected value="">---Select a Category---</option>
           <option value="Shoe">Shoe</option>
           <option value="Clothing">Clothing</option>
           <option value="Accessory">Accessory</option>
@@ -44,8 +47,11 @@
     </div>
     <br>
     <div>
+      <label>
+        Stock Availability
+      </label>
         <select class="form-select" aria-label="Default select example"  th:field="*{stock}">
-          <option selected>Stock Availability</option>
+          <option selected value="">---Stock Level---</option>
           <option value="AVAILABLE_STOCK">Available</option>
           <option value="NO_STOCK">Unavailable</option>
         </select>

@@ -6,9 +6,7 @@ import com.rahim.eccomerce.service.implementation.ItemServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/item")
@@ -38,20 +36,15 @@ public class ItemResource {
         return "get-items";
     }
 
-    @GetMapping("/save")
+    @GetMapping("/add-item")
     public String getItemForm(Model model) {
         model.addAttribute("item", new Item());
         return "add-item";
     }
 
     @PostMapping("/save-item")
-    public String postItemForm(@ModelAttribute("newItem") Item item, Model model) {
-        try{
-            itemService.save(item);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+    public String postItemForm(Item item, Model model) {
+        itemService.save(item);
 
         model.addAttribute("titlePage", "All Items");
         model.addAttribute("itemData", itemService.list(20));
