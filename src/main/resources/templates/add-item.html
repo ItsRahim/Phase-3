@@ -11,23 +11,23 @@
     <div>
       <h1>Add New Item</h1>
     </div>
-    <form th:action="@{saveNewItem}" th:object="${newItem}" method="POST">
+    <form th:action="@{/item/save-item}" th:object="${newItem}" method="POST">
       <div>
         <label>
           Product Name
-          <input type="text" id="product-name" class="form-control">
+          <input type="text" id="product-name" class="form-control" th:field="*{name}">
         </label>
       </div>
       <br>
       <div>
         <label>
           Description
-          <input type="text" id="description" class="form-control">
+          <input type="text" id="description" class="form-control" th:field="*{description}">
         </label>
       </div>
       <br>
       <div>
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" aria-label="Default select example"  th:field="*{category}">
           <option selected>Category</option>
           <option value="Shoe">Shoe</option>
           <option value="Clothing">Clothing</option>
@@ -39,12 +39,12 @@
     <div>
       <label>
         Price
-        <input type="number" min="1" step="any" id="price" class="form-control">
+        <input type="number" min="1" step="any" id="price" class="form-control"  th:field="*{price}">
       </label>
     </div>
     <br>
     <div>
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" aria-label="Default select example"  th:field="*{stock}">
           <option selected>Stock Availability</option>
           <option value="AVAILABLE_STOCK">Available</option>
           <option value="NO_STOCK">Unavailable</option>
@@ -54,8 +54,8 @@
         <div>
           <input type="submit" value="Add Item">
         </div>
-      </div>
     </form>
   </div>
+</div>
 </body>
 </html>
