@@ -1,9 +1,14 @@
 * {
     font-family: sans-serif;
+    padding-left: 20px;
 }
+
 h1 {
+    text-align: center;
+    padding-top: 10px;
     color: #009879
 }
+
 hr.header-ruling {
     border: 0;
     height: 1px;
@@ -19,6 +24,7 @@ hr.header-ruling {
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
 }
+
 .content-table thead tr {
     background-color: #009879;
     color: #ffff;
