@@ -18,7 +18,7 @@
         <th>Category</th>
         <th>Price</th>
         <th>Stock</th>
-        <th>Action</th>
+        <th colspan="2">Action</th>
     </tr>
     </thead>
     <th:block th:each="item: ${itemData}">
@@ -30,6 +30,8 @@
         <td th:text="${item.stock}"></td>
         <td><a class="btn btn-outline-danger btn-sm" th:href="@{/item/delete-item/{id}(id=${item.id})}"
                type="button">Delete</a></td>
+        <td><a class="btn btn-outline-warning btn-sm" th:href="@{/item/update-item/{id}(id=${item.id})}"
+               type="button">Update</a></td>
         </tbody>
     </th:block>
 </table>
