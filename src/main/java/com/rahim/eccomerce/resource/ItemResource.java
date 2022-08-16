@@ -56,6 +56,7 @@ public class ItemResource {
         return "redirect:/item/list";
     }
 
+    //TODO: Finish this method
     @GetMapping("/update-item/{id}")
     public String updateItemForm(@PathVariable Long id) {
         //itemService.updatePrice(id, price)
