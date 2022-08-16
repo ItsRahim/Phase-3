@@ -30,7 +30,7 @@ public class ItemResource {
     }
 
     @GetMapping("/category/{category}")
-    public String getItem(Model model,@PathVariable String category) {
+    public String getItem(Model model, @PathVariable String category) {
         model.addAttribute("titlePage", "Item By " + category);
         model.addAttribute("itemData", itemService.getByCategory(category));
         return "get-items";
@@ -50,11 +50,11 @@ public class ItemResource {
         model.addAttribute("itemData", itemService.list(20));
         return "get-items";
     }
-
-    @DeleteMapping("/delete/{id}")
-    public String deleteItem(@PathVariable("id") Long id) {
-        //itemService.delete(id)
-        return "delete";
+    
+    @DeleteMapping("/delete-item/{id}")
+    public String deleteItem(@PathVariable Long id) {
+        itemService.delete(id);
+        return "redirect:/get-items.html";
     }
 
     @PutMapping("/update-price/{id}/{price}")
