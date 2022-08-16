@@ -50,11 +50,11 @@ public class ItemResource {
         model.addAttribute("itemData", itemService.list(20));
         return "get-items";
     }
-    
-    @DeleteMapping("/delete-item/{id}")
+
+    @GetMapping("/delete-item/{id}")
     public String deleteItem(@PathVariable Long id) {
         itemService.delete(id);
-        return "redirect:/get-items.html";
+        return "redirect:/item/list";
     }
 
     @PutMapping("/update-price/{id}/{price}")
