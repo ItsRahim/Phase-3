@@ -1,5 +1,6 @@
 package com.rahim.eccomerce.resource;
 
+import com.rahim.eccomerce.enumeration.Stock;
 import com.rahim.eccomerce.model.Item;
 import com.rahim.eccomerce.service.implementation.ItemServiceImplementation;
 import lombok.RequiredArgsConstructor;
@@ -56,10 +57,21 @@ public class ItemResource {
         return "redirect:/item/list";
     }
 
-    //TODO: Finish this method
-    @GetMapping("/update-item/{id}")
-    public String updateItemForm(@PathVariable Long id) {
-        //itemService.update(id, price);
+    @PostMapping("/update-item")
+    public String updateItemForm(@RequestParam Long id,
+                                 @RequestParam String name,
+                                 @RequestParam String desc,
+                                 @RequestParam String category,
+                                 @RequestParam double price,
+                                 @RequestParam Stock stock) {
+        System.out.println("Hello");
+        Item item = itemService.get(id);
+        item.setName(name);
+        item.setDescription(desc);
+        item.setCategory(category);
+        item.setPrice(price);
+        item.setStock(stock);
+        itemService.save(item);
         return "redirect:/item/list";
     }
 }
