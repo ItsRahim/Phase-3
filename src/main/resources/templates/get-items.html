@@ -41,18 +41,18 @@
                type="button">Delete</a></td>
         <td>
             <button class="btn btn-outline-warning btn-sm" data-toggle="modal"
-                    th:attr="data-target='#exampleModalCenter' + *{item.id}"
+                    th:attr="data-target='#updateItemModal' + *{item.id}"
                     type="button">
                 Update
             </button>
 
-            <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade"
+            <div aria-hidden="true" aria-labelledby="updateItemModalTitle" class="modal fade"
                  role="dialog"
-                 tabindex="-1" th:id="*{'exampleModalCenter' + item.id}">
+                 tabindex="-1" th:id="*{'updateItemModal' + item.id}">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle"
+                            <h5 class="modal-title" id="updateItemModalLongTitle"
                                 th:text="Update + ${' ' +item.name}"></h5>
                         </div>
                         <div class="modal-body">
@@ -65,38 +65,47 @@
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label for="name">Product Name</label>
-                                    <input class="form-control" id="name" name="name"
+                                    <label for="update-name">Product Name</label>
+                                    <input class="form-control" id="update-name" name="name"
                                            required
-                                           th:placeholder="${item.name}" type="text">
+                                           th:placeholder="${item.name}" th:value="${item.name}" type="text">
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label for="desc">Description</label>
-                                    <input class="form-control" id="desc" name="desc"
+                                    <label for="update-desc">Description</label>
+                                    <input class="form-control" id="update-desc" name="desc"
                                            required
-                                           th:placeholder="${item.description}" type="text">
+                                           th:placeholder="${item.description}" th:value="${item.description}"
+                                           type="text">
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label for="category">Category</label>
-                                    <input class="form-control" id="category" name="category"
-                                           required
-                                           th:placeholder="${item.category}" type="text">
+                                    <label for="update-category">Category</label>
+                                    <select aria-label="Default select example" class="form-select" id="update-category"
+                                            name="category" required>
+                                        <option disabled selected value="">---Select a Category---</option>
+                                        <option value="Shoe">Shoe</option>
+                                        <option value="Clothing">Clothing</option>
+                                        <option value="Accessory">Accessory</option>
+                                        <option value="Other">Other</option>
+                                    </select>
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label for="price">Price</label>
-                                    <input class="form-control" id="price" name="price"
+                                    <label for="update-price">Price</label>
+                                    <input class="form-control" id="update-price" name="price"
                                            required
-                                           th:placeholder="${item.price}" type="number">
+                                           th:placeholder="${item.price}" th:value="${item.price}" type="number">
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label for="stock">Stock Level</label>
-                                    <input class="form-control" id="stock" name="stock"
-                                           required
-                                           th:placeholder="${item.stock}" type="text">
+                                    <label for="update-stock">Stock Level</label>
+                                    <select aria-label="Default select example" class="form-select" id="update-stock"
+                                            name="stock">
+                                        <option disabled selected value="">---Stock Level---</option>
+                                        <option value="AVAILABLE_STOCK">Available</option>
+                                        <option value="NO_STOCK">Unavailable</option>
+                                    </select>
                                 </div>
                                 <br>
                                 <button class="btn btn-success" type="submit">Save changes</button>
