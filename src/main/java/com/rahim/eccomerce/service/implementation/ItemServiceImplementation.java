@@ -30,14 +30,13 @@ public class ItemServiceImplementation implements ItemService {
         return itemRepo.findById(id).get();
     }
 
-    public Item updatePrice(Long id, double price) {
+    public Item update(Long id, String name, String description,
+                            String category, Double price, Stock stock) {
         Item item = itemRepo.findById(id).get();
+        item.setName(name);
+        item.setDescription(description);
+        item.setCategory(category);
         item.setPrice(price);
-        return itemRepo.save(item);
-    }
-
-    public Item updateStock(Long id, Stock stock) {
-        Item item = itemRepo.findById(id).get();
         item.setStock(stock);
         return itemRepo.save(item);
     }

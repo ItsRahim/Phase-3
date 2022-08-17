@@ -8,8 +8,8 @@ import java.util.Collection;
 public interface ItemService {
     Item save(Item item);
     Item get(Long id);
-    Item updatePrice(Long id, double price);
-    Item updateStock(Long id, Stock stock);
+    Item update(Long id, String name, String description,
+                       String category, Double price, Stock stock);
     Boolean delete(Long id);
     Collection<Item> list(int limit);
     Collection<Item> getByCategory(String category);

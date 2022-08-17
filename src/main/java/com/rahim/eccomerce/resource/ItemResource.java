@@ -47,7 +47,7 @@ public class ItemResource {
 
         model.addAttribute("titlePage", "All Items");
         model.addAttribute("itemData", itemService.list(20));
-        return "get-items";
+        return "redirect:/item/list";
     }
 
     @GetMapping("/delete-item/{id}")
@@ -59,7 +59,7 @@ public class ItemResource {
     //TODO: Finish this method
     @GetMapping("/update-item/{id}")
     public String updateItemForm(@PathVariable Long id) {
-        //itemService.updatePrice(id, price)
-        return "update-item";
+        //itemService.update(id, price);
+        return "redirect:/item/list";
     }
 }
