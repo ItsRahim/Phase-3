@@ -101,7 +101,7 @@
                                 <div class="form-group">
                                     <label for="update-stock">Stock Level</label>
                                     <select aria-label="Default select example" class="form-select" id="update-stock"
-                                            name="stock">
+                                            name="stock" required>
                                         <option disabled selected value="">---Stock Level---</option>
                                         <option value="AVAILABLE_STOCK">Available</option>
                                         <option value="NO_STOCK">Unavailable</option>
@@ -109,10 +109,8 @@
                                 </div>
                                 <br>
                                 <button class="btn btn-success" type="submit">Save changes</button>
+                                <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
                         </div>
                     </div>
                 </div>
@@ -121,5 +119,69 @@
         </tbody>
     </th:block>
 </table>
+<button class="btn btn-outline-success" data-target="#addItemModal" data-toggle="modal" type="button">
+    Add
+</button>
+<div aria-hidden="true" aria-labelledby="addItemModalCenterTitle" class="modal fade" id="addItemModal"
+     role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addItemModelLongTitle">Add new Item</h5>
+            </div>
+            <div class="modal-body">
+                <form method="POST" th:action="@{/item/add-item}">
+                    <br>
+                    <div class="form-group">
+                        <label for="add-name">Product Name</label>
+                        <input class="form-control" id="add-name" name="name"
+                               required
+                               th:placeholder="Name..." type="text">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="add-desc">Description</label>
+                        <input class="form-control" id="add-desc" name="desc"
+                               required
+                               th:placeholder="Description..."
+                               type="text">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="add-category">Category</label>
+                        <select aria-label="Default select example" class="form-select" id="add-category"
+                                name="category" required>
+                            <option disabled selected value="">---Select a Category---</option>
+                            <option value="Shoe">Shoe</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Accessory">Accessory</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="add-price">Price</label>
+                        <input class="form-control" id="add-price" name="price"
+                               required type="number">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="update-stock">Stock Level</label>
+                        <select aria-label="Default select example" class="form-select" id="add-stock"
+                                name="stock" required>
+                            <option disabled selected value="">---Stock Level---</option>
+                            <option value="AVAILABLE_STOCK">Available</option>
+                            <option value="NO_STOCK">Unavailable</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

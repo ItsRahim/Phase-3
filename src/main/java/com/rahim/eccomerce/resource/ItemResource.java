@@ -36,18 +36,14 @@ public class ItemResource {
         return "get-items";
     }
 
-    @GetMapping("/add-item")
-    public String getItemForm(Model model) {
-        model.addAttribute("item", new Item());
-        return "add-item";
-    }
-
-    @PostMapping("/save-item")
-    public String postItemForm(Item item, Model model) {
+    @PostMapping("/add-item")
+    public String getItemForm(@RequestParam String name,
+                              @RequestParam String desc,
+                              @RequestParam String category,
+                              @RequestParam double price,
+                              @RequestParam Stock stock) {
+        Item item = new Item(null, name, desc, category, price, stock);
         itemService.save(item);
-
-        model.addAttribute("titlePage", "All Items");
-        model.addAttribute("itemData", itemService.list(20));
         return "redirect:/item/list";
     }
 
