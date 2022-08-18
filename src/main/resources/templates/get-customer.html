@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <link rel="stylesheet" th:href="@{/styles/all-item.css}"/>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1 th:text="${titlePage}"/>
+<hr class="header-ruling">
+<table class="content-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th colspan="2">Action</th>
+    </tr>
+    </thead>
+    <th:block th:each="customer: ${customerData}">
+        <tbody>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.dob}"></td>
+        <td th:text="${customer.gender}"></td>
+        <td><a class="btn btn-outline-danger btn-sm" th:href="@{/customer/delete-customer/{id}(id=${customer.id})}"
+               type="button">Delete</a></td>
+        <td>
+            <button class="btn btn-outline-warning btn-sm" data-toggle="modal"
+                    th:attr="data-target='#updateCustomerModal' + *{customer.id}"
+                    type="button">
+                Update
+            </button>
+
+            <div aria-hidden="true" aria-labelledby="updateCustomerModalTitle" class="modal fade"
+                 role="dialog"
+                 tabindex="-1" th:id="*{'updateCustomerModal' + customer.id}">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateCustomerModalLongTitle"
+                                th:text="Update + ${' ' +customer.name}"></h5>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" th:action="@{/customer/update-customer}">
+                                <div class="form-group">
+                                    <label for="id">Item ID</label>
+                                    <input class="form-control" id="id" name="id"
+                                           readonly th:placeholder="${customer.id}"
+                                           th:value="${customer.id}" type="text">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="update-name">Customer Name</label>
+                                    <input class="form-control" id="update-name" name="name"
+                                           required
+                                           th:placeholder="${customer.name}" th:value="${customer.name}"
+                                           type="text">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="update-email">Email</label>
+                                    <input class="form-control" id="update-email" name="email"
+                                           required
+                                           th:placeholder="${customer.email}" th:value="${customer.email}"
+                                           type="text">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="update-dob">Date of Birth</label>
+                                    <input class="form-control" id="update-dob" name="dob"
+                                           required
+                                           type="date">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="update-gender">Gender</label>
+                                    <select aria-label="Default select example" class="form-select" id="update-gender"
+                                            name="gender" required>
+                                        <option disabled selected value="">---Select a Gender---</option>
+                                        <option value="MALE">Male</option>
+                                        <option value="FEMALE">Female</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <button class="btn btn-success" type="submit">Save changes</button>
+                                <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+        </tbody>
+    </th:block>
+</table>
+<button class="btn btn-outline-success" data-target="#addCustomerModal" data-toggle="modal" type="button">
+    Add
+</button>
+<div aria-hidden="true" aria-labelledby="addCustomerModalCenterTitle" class="modal fade" id="addCustomerModal"
+     role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCustomerModelLongTitle">Add new Customer</h5>
+            </div>
+            <div class="modal-body">
+                <form method="POST" th:action="@{/customer/add-customer}">
+                    <br>
+                    <div class="form-group">
+                        <label for="add-name">Name</label>
+                        <input class="form-control" id="add-name" name="name"
+                               required
+                               th:placeholder="Name..." type="text">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="add-email">Email</label>
+                        <input class="form-control" id="add-email" name="email"
+                               required
+                               th:placeholder="Email..."
+                               type="text">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="add-dob">Date of Birth</label>
+                        <input class="form-control" id="add-dob" name="dob"
+                               required
+                               type="date">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="add-gender">Gender</label>
+                        <select aria-label="Default select example" class="form-select" id="add-gender"
+                                name="gender" required>
+                            <option disabled selected value="">---Select a Gender---</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

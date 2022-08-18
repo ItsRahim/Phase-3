@@ -5,6 +5,7 @@ import com.rahim.eccomerce.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class Customer {
     private Long id;
     private String name;
     private String email;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
     private Gender gender;
 }

@@ -1,88 +1,70 @@
 package com.rahim.eccomerce.resource;
 
+import com.rahim.eccomerce.enumeration.Gender;
 import com.rahim.eccomerce.model.Customer;
 import com.rahim.eccomerce.service.implementation.CustomerServiceImplementation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
-import static java.time.LocalDateTime.now;
-import static java.util.Map.of;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/customer")
 @RequiredArgsConstructor
 public class CustomerResource {
+
     private final CustomerServiceImplementation customerService;
-/*
+
     @GetMapping("/list")
-    public ResponseEntity<Response> getUsers() {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("User", customerService.list(20)))
-                        .message("Customer Retrieved")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    public String getItems(Model model) {
+        model.addAttribute("titlePage", "All Customers");
+        model.addAttribute("customerData", customerService.list(20));
+        return "get-customer";
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getUserById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("User", customerService.get(id)))
-                        .message("Customer Retrieved")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    public String getById(Model model, @PathVariable Long id) {
+        model.addAttribute("titlePage", "Customer by ID");
+        model.addAttribute("customerData", customerService.get(id));
+        return "get-customer";
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<Response> saveUser(@RequestBody @Valid Customer customer) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Customer", customerService.create(customer)))
-                        .message("Customer Created")
-                        .status(CREATED)
-                        .statusCode(CREATED.value())
-                        .build()
-        );
+    @PostMapping("/add-customer")
+    public String getItemForm(@RequestParam String name,
+                              @RequestParam String email,
+                              @RequestParam String dob,
+                              @RequestParam Gender gender) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        LocalDate localDate = LocalDate.parse(dob, formatter);
+        Customer customer = new Customer(null, name, email, localDate, gender);
+        customerService.create(customer);
+        return "redirect:/customer/list";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteUser(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Deleted", customerService.delete(id)))
-                        .message("Customer Deleted")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    @GetMapping("/delete-customer/{id}")
+    public String deleteItem(@PathVariable Long id) {
+        customerService.delete(id);
+        return "redirect:/customer/list";
     }
 
-    @PutMapping("/update-email/{id}/{email}")
-    public ResponseEntity<Response> updateUserEmail(@PathVariable Long id, @PathVariable String email) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("Updated Email", customerService.updateEmail(id, email)))
-                        .message("Email Updated")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+    @PostMapping("/update-customer")
+    public String updateItemForm(@RequestParam Long id,
+                                 @RequestParam String name,
+                                 @RequestParam String email,
+                                 @RequestParam String dob,
+                                 @RequestParam Gender gender) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        LocalDate localDate = LocalDate.parse(dob, formatter);
+        
+        Customer customer = customerService.get(id);
+        customer.setName(name);
+        customer.setEmail(email);
+        customer.setDob(localDate);
+        customer.setGender(gender);
+        customerService.create(customer);
+        return "redirect:/customer/list";
     }
-*/
 }
