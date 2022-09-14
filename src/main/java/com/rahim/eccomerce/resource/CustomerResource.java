@@ -56,9 +56,9 @@ public class CustomerResource {
                                  @RequestParam String email,
                                  @RequestParam String dob,
                                  @RequestParam Gender gender) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dob, formatter);
-        
+
         Customer customer = customerService.get(id);
         customer.setName(name);
         customer.setEmail(email);
